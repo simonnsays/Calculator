@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="screen" >
+            <span id="prev"></span>
+            <span id="opertion"></span>
+            <div id="output"></div>
+        </div>
+        <div class="button-wrapper">
+            <button class="button operation" onclick="">%</button>
+            <button class="button operation" onclick="">C</button>
+            <button class="button operation" onclick="">⌫</button>
+            <button class="button operation" onclick="operate('/')">÷</button>
+        </div>
+        <div class="button-wrapper">
+            <button class="button" onclick="input(7)">7</button>
+            <button class="button" onclick="input(8)">8</button>
+            <button class="button" onclick="input(9)">9</button>
+            <button class="button operation" onclick="operate('x')">x</button>
+        </div>
+        <div class="button-wrapper">
+            <button class="button" id="d" onclick="input(4)">4</button>
+            <button class="button" id="e" onclick="input(5)">5</button>
+            <button class="button" id="f" onclick="input(6)">6</button>
+            <button class="button operation" onclick="operate('-')">-</button>
+        </div>
+        <div class="button-wrapper">
+            <button class="button" id="one" onclick="input(1)">1</button>
+            <button class="button" id="two" onclick="input(2)">2</button>
+            <button class="button" id="three" onclick="input(3)">3</button>
+            <button class="button operation" onclick="operate('+')">+</button>
+        </div>
+        <div class="button-wrapper">
+            <button class="button operation" id="percent">+/-</button>
+            <button class="button" id="j" onclick="input(0)">0</button>
+            <button class="button operation" id="">.</button>
+            <button class="button operation" onclick="equals(firstSet, secondSet, operationG)">=</button>
+        </div>
+    </div>
+
+    <script>
+        let firstSet = ""
+        let secondSet = ""
+        let operationG
+        
+
+        let output = document.querySelector('#output')
+        let prev = document.querySelector('#prev')
+        console.log(prev.innerHTML)
+
+        function input(thisNum) {
+            if (output.innerHTML.length < 10) {
+                output.innerHTML += thisNum
+            }
+        }
+
+        let previous = " "
+        function operate(operationL) {
+            let operation = operationL
+
+            if (previous == " ") {
+                previous = output.innerHTML
+            }
+
+            if (output.innerHTML.length == 0) {
+                previous = 0
+            }
+
+            prev.innerHTML = previous +" "+ operationL
+            firstSet = parseInt(previous)
+            operationG = operationL
+            output.innerHTML = ""
+            console.log(typeof(operationG))
+             
+        }
+
+        function equals(fNum,sNum, op) {
+            if (sNum.length == 0) {
+                sNum = 0
+            }
+            switch (op){
+                case '+':
+                    output.innerHTML = fNum + sNum
+                    break
+                case '-':
+                    output.innerHTML = fNum - sNum
+                    break
+                case '*':
+                    output.innerHTML = fNum * sNum
+                    break
+                case '/':
+                    output.innerHTML = fNum / sNum
+                    break
+            }
+        }
+    </script>
+</body>
+</html>
