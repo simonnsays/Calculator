@@ -39,6 +39,14 @@ body {
     font-size: 55px;
 }
 
+#sign {
+    /* display: flex; */
+    position: absolute;
+    left: 5px;
+    bottom: -5px;
+    font-size: 55px;
+}
+
 .screen {
     height: 80px;
     margin: 10px;
@@ -48,6 +56,7 @@ body {
     overflow: hidden;
     text-align: right;
     background-color: #778899;
+    position: relative;
 }
 
 .button-wrapper {

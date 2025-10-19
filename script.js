@@ -23,7 +23,6 @@ class Calculator {
             }
             
             const button = e.target.id
-            console.log(button)
             switch(button) {
                 case '+':
                 case '-':
@@ -44,6 +43,9 @@ class Calculator {
                 case 'decimal':
                     this.makeDecimal()
                     break
+                case 'swapSign':
+                    this.swapSign()
+                    break
                 default:
                     this.input(button)
                     break
@@ -59,7 +61,11 @@ class Calculator {
     }
  
     input(number) {
-        console.log(typeof number)
+        console.log(this.currentDisplay.value.length)
+        if(this.currentDisplay.value.length >= 9) {
+            window.alert("Maximum input length reached")
+            return
+        }
         this.currentDisplay.value += number
         this.updateDisplay()    
     }
@@ -94,13 +100,25 @@ class Calculator {
 
     updateOperation(operation) {
         if(this.currentDisplay.value === '') return
-        this.previousDisplay.value = this.currentDisplay.value
+
+        if(this.previousDisplay.value !== '') {
+            this.calculate()
+        }
+
+        this.previousDisplay.value =  this.currentDisplay.value
         this.operand.value = operation
         this.currentDisplay.value = ''
         this.isDecimal = false
         this.updateDisplay()
         
         console.log(this.operand)
+    }
+
+    swapSign() {
+        console.log(this.currentDisplay.value)
+        if(this.currentDisplay.value === '') return
+        this.currentDisplay.value = (parseFloat(this.currentDisplay.value) * -1).toString()
+        this.updateDisplay()
     }
 
     calculate() {
@@ -124,6 +142,12 @@ class Calculator {
         if(operation === '÷') {
             result = over / under
         }
+
+        if(this.isDecimal) {
+            console.log(result)
+            result = result.toFixed(7)
+        }
+
 
         this.currentDisplay.value = result.toString()
         this.previousDisplay.value = ''
