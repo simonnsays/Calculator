@@ -1,3 +1,14 @@
+:root {
+    --body-bg: #e6e6e6;
+    --container-bg: #908f8a;
+    --operation-bg: #545a73;
+    --screen-bg: #778899;
+    --button-bg: #343a43;
+    --button-txt: #908f8a;
+    --screen-txt: #000
+
+}
+
 *{
     font-family: 'Courier New', Courier, monospace;
 }
@@ -7,6 +18,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--body-bg);
+}
+
+body.dark-mode {
+    --body-bg: #151515;
+    --container-bg: #2a2a2a;
+    --screen-bg: #2b2f36;
+    --button-bg: #3b3f46;
+    --oparation-bg: #5a5f7a;
+    --button-txt: #d4d4d4;
+    --screen-txt: #d4d4d4
+
+
 }
 
 .container {
@@ -16,12 +40,8 @@ body {
     width: 370px;
     border: 1px solid;
     border-radius: 2% ;
-    background-color: #908f8a;
+    background-color: var(--container-bg);
     text-align: center;
-}
-
-#operate {
-    background-color: #483D8B;
 }
 
 #prev {
@@ -51,11 +71,12 @@ body {
     height: 80px;
     margin: 10px;
     padding-right: 10px;
-    border: 1px solid;
+    border: 1px solid none;
     border-radius: 2%;
     overflow: hidden;
     text-align: right;
-    background-color: #778899;
+    background-color:var(--screen-bg);
+    color: var(--screen-txt);
     position: relative;
 }
 
@@ -70,11 +91,11 @@ body {
     height: 70px;
     border-radius: 7%;
     margin: 2px;
-    background-color: #343a43;
+    background-color: var(--button-bg);
     display: flex;
     align-items: center;
     justify-content: center;
-    color:#908f8a;
+    color:var(--button-txt);
     font-size: 30px;
     text-decoration: none; 
 }
@@ -83,5 +104,14 @@ body {
 }
 
 .operation {
-    background-color: #545a73;
+    background-color: var(--operation-bg);
+}
+
+.mode {
+    height: 30px;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    border: 1px solid black;
+    cursor: pointer;
 }

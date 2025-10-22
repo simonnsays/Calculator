@@ -5,7 +5,7 @@ class Calculator {
             element: document.querySelector('#operation')
         } 
         this.currentDisplay = {
-            value: '',
+            value: 0,
             element: document.querySelector('#output')
         }
         this.previousDisplay = {
@@ -28,7 +28,6 @@ class Calculator {
                 case '-':
                 case 'x':
                 case '÷':
-                // case 'modulo':
                     this.updateOperation(button)
                     break
                 case 'equals': 
@@ -46,26 +45,62 @@ class Calculator {
                 case 'swapSign':
                     this.swapSign()
                     break
+                case 'sqrt':
+                    this.squareRoot()
+                    break
                 default:
                     this.input(button)
                     break
             }
+        })
 
+        window.addEventListener('keyup', (e) => {
+            const key = e.key
+            console.log(key)
+            if(Number.isInteger(parseFloat(key))) {
+                this.input(parseFloat(key))
+                return
+            }
+
+            switch(key) {
+                case '+':
+                case '-':
+                    this.updateOperation(key)
+                    break
+                case '*':
+                    this.updateOperation('x')
+                    break
+                case '/':
+                    this.updateOperation('÷')
+                    break
+                case 'Enter':
+                    this.calculate()
+                    break
+                case 'Backspace':
+                    this.delete()
+                case '.':
+                    this.makeDecimal()
+            }
         })
     }
 
     updateDisplay() {
-        this.currentDisplay.element.innerText = this.currentDisplay.value
+        this.currentDisplay.element.innerText =this.currentDisplay.value
+        
         this.previousDisplay.element.innerText = this.previousDisplay.value
         this.operand.element.innerText = this.operand.value
     }
  
     input(number) {
-        console.log(this.currentDisplay.value.length)
         if(this.currentDisplay.value.length >= 9) {
             window.alert("Maximum input length reached")
             return
         }
+
+        if(this.currentDisplay.value === 0)  {
+            this.currentDisplay.value = ''
+        }
+
         this.currentDisplay.value += number
         this.updateDisplay()    
     }
@@ -91,7 +126,7 @@ class Calculator {
     }
 
     clear() {
-        this.currentDisplay.value = ''
+        this.currentDisplay.value = 0
         this.previousDisplay.value = ''
         this.operand.value = ''
         this.isDecimal = false
@@ -121,6 +156,18 @@ class Calculator {
         this.updateDisplay()
     }
 
+    squareRoot() {
+        const val = parseFloat(this.currentDisplay.value);
+        if (isNaN(val)) return;
+        if (val < 0) {
+            window.alert("Cannot take square root of a negative number");
+            return;
+        }
+        const result = Math.sqrt(val);
+        this.currentDisplay.value = result.toFixed(7).replace(/\.?0+$/, ''); // trim trailing zeros
+        this.updateDisplay();
+    }
+
     calculate() {
         if(this.previousDisplay.value === '' || this.currentDisplay.value === '' || this.operand.value === '') return
 
@@ -143,11 +190,9 @@ class Calculator {
             result = over / under
         }
 
-        if(this.isDecimal) {
-            console.log(result)
-            result = result.toFixed(7)
+        if (typeof result === "number" && !Number.isInteger(result)) {
+            result = parseFloat(result.toFixed(7));
         }
-
 
         this.currentDisplay.value = result.toString()
         this.previousDisplay.value = ''
@@ -159,3 +204,4 @@ class Calculator {
 
 const calculator = new Calculator();
 calculator.init();
+
