@@ -115,23 +115,28 @@ body.dark-mode {
     border-radius: 100px;
     position: relative;
 
-    background-color: var(--screen-bg);
+    background-color: var(--body-bg);
 }
 
 .knob {
     width: 50px;
     height: 87%;
     border-radius: 100px;
-    border: 2px solid var(--mode-bg);
+    border: 1px solid var(--mode-bg);
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: 2px;
+    left: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: transform 0.2s ease-in-out;
     font-size: 30px;
 
+    background-color: var(--screen-bg);
+
+}
+.knob:hover {
+    cursor: pointer;
 }
 .knob.right {
     transform: translateX(63px);
