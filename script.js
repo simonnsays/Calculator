@@ -205,3 +205,15 @@ class Calculator {
 const calculator = new Calculator();
 calculator.init();
 
+let isDark = false
+const knobElement = document.querySelector('.knob')
+const body = document.querySelector('body')
+
+knobElement.addEventListener('click', () => {
+    isDark = !isDark
+
+    knobElement.classList.toggle('right', isDark)
+    knobElement.innerText = isDark ? '🌙' : '☀️'
+    body.classList.toggle('dark-mode', isDark)
+})
+
