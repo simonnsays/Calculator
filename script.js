@@ -175,6 +175,11 @@ class Calculator {
         const under = parseFloat(this.currentDisplay.value)
         const operation = this.operand.value
 
+        if(under === 0 && operation === '÷') {
+            alert("Do not divide by zero!")
+            return
+        }
+
         let result = this.currentDisplay.value
 
         if(operation === '+') {
