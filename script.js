@@ -204,6 +204,9 @@ class Calculator {
         this.operand.value = ''
         this.isDecimal = false
         this.updateDisplay()
+
+        // pressing a new digit should clear the result
+        this.currentDisplay.value = 0
     }
 }
 
@@ -221,4 +224,3 @@ knobElement.addEventListener('click', () => {
     knobElement.innerText = isDark ? '🌙' : '☀️'
     body.classList.toggle('dark-mode', isDark)
 })
-
